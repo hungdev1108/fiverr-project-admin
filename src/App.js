@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import Admin from "./Pages/Admin/Admin";
+import UserManagement from "./Pages/UserManagement/UserManagement";
+import JobManagement from "./Pages/JobManagement/JobManagement";
+import JobTypeManagement from "./Pages/JobTypeManagement/JobTypeManagement";
+import ServiceManagement from "./Pages/ServiceManagement/ServiceManagement";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        {/* <Loading /> */}
+        <Switch>
+          {/* Components */}
+          <AdminTemplate path="/admin" exact Component={Admin} />
+
+          <AdminTemplate path="/admin/adduser" exact Component={UserManagement} />
+          <AdminTemplate path="/admin/listjob" exact Component={JobManagement} />
+          <AdminTemplate path="/admin/listjobtype" exact Component={JobTypeManagement} />
+          <AdminTemplate path="/admin/listservice" exact Component={ServiceManagement} />
+
+          <AdminTemplate path="/" exact Component={Admin} />
+        </Switch>
+      </Router>
     </div>
   );
 }

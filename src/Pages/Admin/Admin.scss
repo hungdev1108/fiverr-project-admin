@@ -1,0 +1,39 @@
+@import "../../assets/scss/App.scss";
+
+#components-layout-demo-responsive .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+
+.ant-layout-sider-children {
+  min-height: 100vh;
+}
+
+.ant-menu-item.ant-menu-item-only-child {
+  padding-left: 32px !important;
+}
+
+// .ant-layout-sider {
+//   flex: 0 0 220px !important;
+//   max-width: 220px !important;
+//   //   min-width: 250px !important;
+//   //   width: 250px !important;
+// }
+
+// @include tablet-md {
+//   .ant-layout-sider {
+//     flex: 0 0 0 !important;
+//     max-width: 0 !important;
+//     min-width: 0 !important;
+//     width: 0 !important;
+//   }
+// }
