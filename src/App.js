@@ -9,6 +9,7 @@ import EditUser from "./Pages/UserManagement/EditUser/EditUser";
 import AddUser from "./Pages/UserManagement/AddUser/AddUser";
 import AddJob from "./Pages/JobManagement/AddJob/AddJob";
 import EditJob from "./Pages/JobManagement/EditJob/EditJob";
+import Login from "./Pages/Login/Login";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Switch>
           {/* Components */}
           <AdminTemplate path="/admin" exact Component={UserManagement} />
+
+          <AdminTemplate path="/login" exact Component={Login} />
 
           <AdminTemplate path="/admin/listuser" exact Component={UserManagement} />
           <AdminTemplate path="/admin/listuser/add" exact Component={AddUser} />

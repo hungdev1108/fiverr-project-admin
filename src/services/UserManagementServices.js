@@ -11,7 +11,7 @@ export class UserManagementServices extends baseService {
   };
 
   // API thêm người dùng
-  postNguoiDung = (infoUser) => {
+  postNguoiDung = (formData) => {
     // {
     //     "name": "string",
     //     "email": "string",
@@ -27,7 +27,7 @@ export class UserManagementServices extends baseService {
     //       "string"
     //     ]
     //   }
-    return this.post(`api/users`, infoUser);
+    return this.post(`api/users`, formData);
   };
 
   // API xóa người dùng

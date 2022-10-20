@@ -1,9 +1,10 @@
 import React, { Fragment, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import "./AdminTemplate.scss";
 
 import { Layout, Menu, Dropdown } from "antd";
 import { Link } from "react-router-dom";
+import { USER_LOGIN } from "../../utils/settings/config";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -44,6 +45,12 @@ function AdminTemplate(props) {
     window.scrollTo(0, 0);
   }, []);
 
+  // Check role account
+  //   if (!localStorage.getItem(USER_LOGIN)) {
+  //     alert("Bạn không có quyền truy cập vào trang này !");
+  //     return <Redirect to="/login" />;
+  //   }
+
   return (
     <Route
       {...restProps}
@@ -60,10 +67,10 @@ function AdminTemplate(props) {
               breakpoint="lg"
               collapsedWidth="0"
               onBreakpoint={(broken) => {
-                console.log(broken);
+                // console.log(broken);
               }}
               onCollapse={(collapsed, type) => {
-                console.log(collapsed, type);
+                // console.log(collapsed, type);
               }}
             >
               <div className="d-flex align-items-center justify-content-center">

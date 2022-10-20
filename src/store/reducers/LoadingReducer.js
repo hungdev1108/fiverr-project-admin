@@ -1,4 +1,4 @@
-import { DISPLAY_LOADING, HIDE_LOADING } from "store/types/LoadingType";
+import { DISPLAY_LOADING, HIDE_LOADING } from "../types/LoadingType";
 
 const stateDefault = {
   isLoading: false,
