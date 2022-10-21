@@ -1,6 +1,7 @@
 import {
   ConfirmDeleteUser,
   ConfirmDeleteUserDONE,
+  ConfirmUpdate,
   CreateAccountSuccess,
 } from "../../components/Notification/Notification";
 import { userManagementServices } from "../../services/UserManagementServices";
@@ -62,6 +63,21 @@ export const getTimKiemNguoiDungTheoTenAction = (tenNguoiDung) => {
   };
 };
 
+export const putThongTinNguoiDungAction = (id, infoUser, history) => {
+  return async (dispatch) => {
+    try {
+      dispatch(displayLoadingAction);
+      const result = await userManagementServices.putThongTinNguoiDung(id, infoUser);
+      ConfirmUpdate(history);
+      dispatch(hideLoadingAction);
+      //   console.log("result", result);
+    } catch (errors) {
+      dispatch(hideLoadingAction);
+      console.log(errors);
+    }
+  };
+};
+
 export const getThongTinNguoiDungTheoIdAction = (id) => {
   return async (dispatch) => {
     try {
@@ -72,7 +88,7 @@ export const getThongTinNguoiDungTheoIdAction = (id) => {
         thongTinNguoiDung: result.data.content,
       });
       dispatch(hideLoadingAction);
-      console.log("ACTION", result.data.content);
+      //   console.log("ACTION", result.data.content);
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);

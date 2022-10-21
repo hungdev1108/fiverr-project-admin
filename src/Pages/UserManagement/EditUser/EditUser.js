@@ -2,17 +2,21 @@ import { DatePicker, Form, Input, Select } from "antd";
 import moment from "moment";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouteMatch } from "react-router-dom";
-import { getThongTinNguoiDungTheoIdAction } from "../../../store/actions/UserManagementAction";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import {
+  getThongTinNguoiDungTheoIdAction,
+  putThongTinNguoiDungAction,
+} from "../../../store/actions/UserManagementAction";
 
 const { Option } = Select;
 
 function EditUser() {
   const dispatch = useDispatch();
   const match = useRouteMatch();
+  const history = useHistory();
 
   const userId = match.params.id;
-  console.log("userId", userId);
+  //   console.log("userId", userId);
 
   const [form] = Form.useForm();
 
@@ -21,16 +25,20 @@ function EditUser() {
 
   useEffect(() => {
     dispatch(getThongTinNguoiDungTheoIdAction(userId));
-  }, []);
+  }, [userId]);
+
+  useEffect(() => {
+    if (thongTinNguoiDung?.name) {
+      form.setFieldsValue({ ...thongTinNguoiDung, birthday: moment(thongTinNguoiDung?.birthday) });
+    }
+  }, [thongTinNguoiDung?.name]);
 
   const onFinish = (values) => {
-    values.name = thongTinNguoiDung.name;
-    values.email = thongTinNguoiDung.email;
-    values.phone = thongTinNguoiDung.phone;
     values.birthday = moment(values.birthday).format("MM/DD/YYYY");
-    values.skill = thongTinNguoiDung.skill;
-    values.role = "ADMIN";
-    values.certification = thongTinNguoiDung.certification;
+    values = { ...values, role: "ADMIN" };
+    console.log(values);
+
+    dispatch(putThongTinNguoiDungAction(userId, values, history));
   };
 
   return (
@@ -39,15 +47,17 @@ function EditUser() {
       <Form
         form={form}
         onFinish={onFinish}
-        initialValues={{
-          name: thongTinNguoiDung?.name,
-          email: thongTinNguoiDung?.email,
-          phone: thongTinNguoiDung?.phone,
-          birthday: moment(thongTinNguoiDung?.birthday),
-          role: "ADMIN",
-          skill: thongTinNguoiDung?.skill,
-          certification: thongTinNguoiDung?.certification,
-        }}
+        initialValues={
+          {
+            //   name: thongTinNguoiDung?.name,
+            //   email: thongTinNguoiDung?.email,
+            //   phone: thongTinNguoiDung?.phone,
+            //   birthday: moment(thongTinNguoiDung?.birthday),
+            //   role: "ADMIN",
+            //   skill: thongTinNguoiDung?.skill,
+            //   certification: thongTinNguoiDung?.certification,
+          }
+        }
         labelCol={{
           span: 7,
         }}
@@ -69,7 +79,7 @@ function EditUser() {
             },
           ]}
         >
-          <Input />
+          <Input value={thongTinNguoiDung?.name} />
         </Form.Item>
 
         <Form.Item label="E-mail" name="email" rules={[{ required: true, message: "Please input your email!" }]}>

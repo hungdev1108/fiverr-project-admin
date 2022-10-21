@@ -10,12 +10,13 @@ import AddUser from "./Pages/UserManagement/AddUser/AddUser";
 import AddJob from "./Pages/JobManagement/AddJob/AddJob";
 import EditJob from "./Pages/JobManagement/EditJob/EditJob";
 import Login from "./Pages/Login/Login";
+import Loading from "./components/Loading/Loading";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Loading /> */}
+        <Loading />
         <Switch>
           {/* Components */}
           <AdminTemplate path="/admin" exact Component={UserManagement} />

@@ -97,6 +97,16 @@ export const ConfirmDeleteUserDONE = () => {
   });
 };
 
+export const ConfirmUpdate = (history) => {
+  Modal.success({
+    title: "Notification!",
+    content: "Update info user successfully!",
+    onOk() {
+      history.push("/");
+    },
+  });
+};
+
 // export const ConfirmDeleteUser = () => {
 //   Modal.warning({
 //     title: "Notification!",
