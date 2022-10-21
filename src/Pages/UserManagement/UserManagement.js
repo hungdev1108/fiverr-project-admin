@@ -1,10 +1,9 @@
 import React, { Fragment, useEffect } from "react";
-import { Table, Input, Tag, Button } from "antd";
+import { Table, Input, Tag } from "antd";
 import { UserAddOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getDanhSachNguoiDungAction, getTimKiemNguoiDungTheoTenAction } from "../../store/actions/UserManagementAction";
-import { NavLink } from "react-router-dom";
-import { array } from "yup";
+import { Link, NavLink } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -12,7 +11,6 @@ function UserManagement() {
   const dispatch = useDispatch();
   const { danhSachNguoiDung } = useSelector((state) => state.UserManagementReducer);
 
-  //   console.log(typeof danhSachNguoiDung);
   console.log({ danhSachNguoiDung });
 
   const columns = [
@@ -121,15 +119,15 @@ function UserManagement() {
       title: "Action",
       dataIndex: "action",
       width: "25%",
-      render: () => {
+      render: (text, user) => {
         return (
           <Fragment>
-            <NavLink to="/">
+            <Link to={`/admin/user/edit/${user.id}`}>
               <EditOutlined className="btn btn-primary" />
-            </NavLink>
-            <NavLink to="/">
+            </Link>
+            <Link to="/">
               <DeleteOutlined className="ml-3 btn btn-danger" />
-            </NavLink>
+            </Link>
           </Fragment>
         );
       },
@@ -143,7 +141,7 @@ function UserManagement() {
   }, []);
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
+    // console.log("params", pagination, filters, sorter, extra);
   };
   const onSearch = (value) => {
     dispatch(getTimKiemNguoiDungTheoTenAction(value));

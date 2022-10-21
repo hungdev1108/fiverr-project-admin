@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import moment from "moment";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { postNguoiDungAction } from "../../../store/actions/UserManagementAction";
 
 const { Option } = Select;
@@ -10,9 +11,7 @@ const { Option } = Select;
 function AddUser() {
   const children = [];
 
-  //   const handleChange = (value) => {
-  //     console.log(`selected ${value}`);
-  //   };
+  const history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -44,7 +43,7 @@ function AddUser() {
     onSubmit: (values) => {
       console.log(values);
 
-      dispatch(postNguoiDungAction(values));
+      dispatch(postNguoiDungAction(values, history));
       console.log("values", values);
     },
   });

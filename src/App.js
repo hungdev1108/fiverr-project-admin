@@ -24,7 +24,7 @@ function App() {
 
           <AdminTemplate path="/admin/listuser" exact Component={UserManagement} />
           <AdminTemplate path="/admin/listuser/add" exact Component={AddUser} />
-          <AdminTemplate path="/admin/listuser/edit/:id" exact Component={EditUser} />
+          <AdminTemplate path="/admin/user/edit/:id" exact Component={EditUser} />
 
           <AdminTemplate path="/admin/listjob" exact Component={JobManagement} />
           <AdminTemplate path="/admin/listjob/add" exact Component={AddJob} />
