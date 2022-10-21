@@ -2,7 +2,11 @@ import React, { Fragment, useEffect } from "react";
 import { Table, Input, Tag } from "antd";
 import { UserAddOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getDanhSachNguoiDungAction, getTimKiemNguoiDungTheoTenAction } from "../../store/actions/UserManagementAction";
+import {
+  deleteNguoiDungAction,
+  getDanhSachNguoiDungAction,
+  getTimKiemNguoiDungTheoTenAction,
+} from "../../store/actions/UserManagementAction";
 import { Link, NavLink } from "react-router-dom";
 
 const { Search } = Input;
@@ -125,9 +129,18 @@ function UserManagement() {
             <Link to={`/admin/user/edit/${user.id}`}>
               <EditOutlined className="btn btn-primary" />
             </Link>
-            <Link to="/">
+            <span
+              to="/"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                if (window.confirm("Are you sure delete user " + user.name + "?")) {
+                  // Call
+                  dispatch(deleteNguoiDungAction(user.id));
+                }
+              }}
+            >
               <DeleteOutlined className="ml-3 btn btn-danger" />
-            </Link>
+            </span>
           </Fragment>
         );
       },
@@ -164,7 +177,7 @@ function UserManagement() {
           onSearch={onSearch}
         />
       </div>
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Table columns={columns} dataSource={data} onChange={onChange} rowKey={"id"} />
     </div>
   );
 }

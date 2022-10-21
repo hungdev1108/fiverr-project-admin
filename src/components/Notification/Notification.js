@@ -1,4 +1,5 @@
 import { Modal } from "antd";
+import { useDispatch } from "react-redux";
 
 const { confirm } = Modal;
 
@@ -85,3 +86,21 @@ export const CreateAccountSuccess = (history) => {
     },
   });
 };
+
+export const ConfirmDeleteUserDONE = () => {
+  Modal.success({
+    title: "Notification!",
+    content: "Delete user successfully!",
+    onOk() {
+      window.location.reload();
+    },
+  });
+};
+
+// export const ConfirmDeleteUser = () => {
+//   Modal.warning({
+//     title: "Notification!",
+//     content: "Are you sure delete user?",
+//     onOk: {},
+//   });
+// };

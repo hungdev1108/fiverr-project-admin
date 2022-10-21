@@ -1,4 +1,8 @@
-import { CreateAccountSuccess } from "../../components/Notification/Notification";
+import {
+  ConfirmDeleteUser,
+  ConfirmDeleteUserDONE,
+  CreateAccountSuccess,
+} from "../../components/Notification/Notification";
 import { userManagementServices } from "../../services/UserManagementServices";
 import {
   SET_DANH_SACH_NGUOI_DUNG,
@@ -69,6 +73,22 @@ export const getThongTinNguoiDungTheoIdAction = (id) => {
       });
       dispatch(hideLoadingAction);
       console.log("ACTION", result.data.content);
+    } catch (errors) {
+      dispatch(hideLoadingAction);
+      console.log(errors);
+    }
+  };
+};
+
+export const deleteNguoiDungAction = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(displayLoadingAction);
+      const result = await userManagementServices.deleteNguoiDung(id);
+      ConfirmDeleteUserDONE();
+      console.log("result", result);
+      getDanhSachNguoiDungAction();
+      dispatch(hideLoadingAction);
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);

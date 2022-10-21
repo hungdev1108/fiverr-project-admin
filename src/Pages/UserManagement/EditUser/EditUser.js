@@ -16,18 +16,18 @@ function EditUser() {
 
   const [form] = Form.useForm();
 
-  let { thongTinNguoiDung } = useSelector((state) => state.UserManagementReducer);
+  let thongTinNguoiDung = useSelector((state) => state.UserManagementReducer.thongTinNguoiDung);
   console.log("thongTinNguoiDung", thongTinNguoiDung);
 
   useEffect(() => {
     dispatch(getThongTinNguoiDungTheoIdAction(userId));
-  }, [userId]);
+  }, []);
 
   const onFinish = (values) => {
     values.name = thongTinNguoiDung.name;
     values.email = thongTinNguoiDung.email;
     values.phone = thongTinNguoiDung.phone;
-    values.birthday = moment(values.birthday).format("DD/MM/YYYY");
+    values.birthday = moment(values.birthday).format("MM/DD/YYYY");
     values.skill = thongTinNguoiDung.skill;
     values.role = "ADMIN";
     values.certification = thongTinNguoiDung.certification;
@@ -103,17 +103,17 @@ function EditUser() {
         </Form.Item>
 
         <Form.Item name="skill" label="Skill">
-          <Select mode="tags" placeholder="select your skills">
-            <Option value="HTML">HTML</Option>
-            <Option value="CSS">CSS</Option>
-            <Option value="JS">JS</Option>
+          <Select mode="tags" placeholder="Select your skills">
+            <Option value=""></Option>
+            {/* <Option value="CSS">CSS</Option>
+            <Option value="JS">JS</Option> */}
           </Select>
         </Form.Item>
 
         <Form.Item name="certification" label="Certification">
-          <Select mode="tags" placeholder="select your certification">
-            <Option value="CYBER">CYBERSOFT</Option>
-            <Option value="FSOFT">FSOFT</Option>
+          <Select mode="tags" placeholder="Select your certification">
+            <Option value=""></Option>
+            {/* <Option value="FSOFT">FSOFT</Option> */}
           </Select>
         </Form.Item>
 
