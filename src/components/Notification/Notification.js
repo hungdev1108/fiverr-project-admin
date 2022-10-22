@@ -1,5 +1,6 @@
 import { Modal } from "antd";
-import { useDispatch } from "react-redux";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { deleteJobaction } from "../../store/actions/JobManagementAction";
 
 const { confirm } = Modal;
 
@@ -114,3 +115,13 @@ export const ConfirmUpdate = (history) => {
 //     onOk: {},
 //   });
 // };
+export const confirmDelete = (name, id, dispacth) => {
+  confirm({
+    title: "Notification!",
+    content: `Are you sure to delete ${name}`,
+    icon: <ExclamationCircleOutlined />,
+    onOk() {
+      dispacth(deleteJobaction(id));
+    },
+  });
+};

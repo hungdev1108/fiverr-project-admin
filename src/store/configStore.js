@@ -2,11 +2,13 @@ import thunk from "redux-thunk";
 
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { UserManagementReducer } from "./reducers/UserManagementReducer";
+import { JobManagementReducer } from './reducers/JobManagementReducer'
 import { LoadingReducer } from "./reducers/LoadingReducer";
 
 const rootReducer = combineReducers({
   // State
   UserManagementReducer,
+  JobManagementReducer,
   LoadingReducer,
 });
 

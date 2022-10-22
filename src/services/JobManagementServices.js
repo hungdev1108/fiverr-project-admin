@@ -32,7 +32,7 @@ export class JobManagementServices extends baseService {
 
   // API xóa công việc
   deleteCongViec = (id) => {
-    return this.delete(`api/cong-viec?=${id}`);
+    return this.delete(`api/cong-viec/${id}`);
   };
 
   // API upload hình ảnh công việc
