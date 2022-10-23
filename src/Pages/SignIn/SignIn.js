@@ -42,7 +42,7 @@ function SignIn() {
                       <NavLink to="/" className="signIn__logo mb-4">
                         {logoSvg}
                       </NavLink>
-                      <h5 className="mt-3 mb-3">Sign in to your account</h5>
+                      <h5 className="mt-3 mb-3">Web for admin account</h5>
                     </div>
                     <form
                       onSubmit={(event) => {
@@ -96,18 +96,6 @@ function SignIn() {
                         <a className="text-muted" href="#!">
                           Forgot password?
                         </a>
-                      </div>
-                      <div className="d-flex align-items-center justify-content-center pb-4">
-                        <p className="mb-0 me-2 mr-2">Don't have an account?</p>
-                        <button
-                          onClick={() => {
-                            history.push(`/signup`);
-                          }}
-                          type="button"
-                          className="btn btn-dark"
-                        >
-                          Sign Up
-                        </button>
                       </div>
                     </form>
                   </div>

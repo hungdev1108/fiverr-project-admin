@@ -15,8 +15,6 @@ function UserManagement() {
   const dispatch = useDispatch();
   const { danhSachNguoiDung } = useSelector((state) => state.UserManagementReducer);
 
-  //   console.log({ danhSachNguoiDung });
-
   const columns = [
     {
       title: "ID",
@@ -164,13 +162,14 @@ function UserManagement() {
   const onChange = (pagination, filters, sorter, extra) => {
     // console.log("params", pagination, filters, sorter, extra);
   };
+
   const onSearch = (value) => {
     dispatch(getTimKiemNguoiDungTheoTenAction(value));
   };
 
   return (
     <div className="container">
-      <h3 className="text-center">List User</h3>
+      <h3 className="text-center">User List</h3>
       <div className="d-flex justify-content-between align-items-center m-0 p-0 pb-3">
         <NavLink to="/admin/listuser/add" className="btn btn-primary px-3 d-flex align-items-center">
           <UserAddOutlined />

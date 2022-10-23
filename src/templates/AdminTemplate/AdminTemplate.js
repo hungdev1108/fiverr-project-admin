@@ -41,6 +41,7 @@ const items = [
   getItem("Job Management", "sub2", <></>, [getItem(<Link to="/admin/listjob">List Job</Link>, "4")]),
   getItem("Job Type Management", "sub3", <></>, [
     getItem(<Link to="/admin/listjobtype">List Job Type (Menu)</Link>, "5"),
+    getItem(<Link to="/admin/listjobtypedetail">List Job Type Detail</Link>, "6"),
   ]),
   getItem("Service Management", "sub4", <></>, [getItem(<Link to="/admin/listservice">List Service</Link>, "7")]),
 ];

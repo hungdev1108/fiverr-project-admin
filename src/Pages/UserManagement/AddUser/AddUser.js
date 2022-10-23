@@ -14,10 +14,6 @@ function AddUser() {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    // Tuấn Anh ơi, em coi note nhé:
-    // Đây là khi mình push vô data nhé
-    // Ví dụ 12/10/2022 thì nó sẽ thành 10/12/2022
-    // Nhưng khi em hiển thị bên edit thì chỉ cần format lại DD/MM/YYYY là được
     values.birthday = moment(values.birthday).format("MM/DD/YYYY");
     values = { ...values, role: "ADMIN" };
     console.log(values);
