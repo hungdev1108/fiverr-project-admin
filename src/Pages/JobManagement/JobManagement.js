@@ -2,9 +2,7 @@ import { Table } from "antd";
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import {
-  fectchListJobAction,
-} from "../../store/actions/JobManagementAction";
+import { fectchListJobAction } from "../../store/actions/JobManagementAction";
 import { BookTwoTone, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { confirmDelete } from "../../components/Notification/Notification";
 // const { Search } = Input;
@@ -18,7 +16,7 @@ function JobManagement() {
       title: <span className="font-semibold uppercase">Id</span>,
       dataIndex: "id",
       value: (text, object) => <span>{text}</span>,
-      sorter: (a, b) => a.maPhim - b.maPhim,
+      sorter: (a, b) => a.id - b.id,
       defaultSortOrder: "descend",
       sortDirections: ["descend"],
       width: "7%",
@@ -29,7 +27,7 @@ function JobManagement() {
       render: (text, job, index) => (
         <>
           <img
-            style={{width: "100%",height: "100%"}}
+            style={{ width: "100%", height: "100%" }}
             src={text}
             alt={job.tenCongViec}
             onError={(e) => {
@@ -56,9 +54,7 @@ function JobManagement() {
     {
       title: <span className="font-semibold">Description</span>,
       dataIndex: "moTa",
-      render: (text, job) => (
-        <>{job.moTa.length > 50 ? job.moTa.substr(0, 100) + "..." : job.moTa}</>
-      ),
+      render: (text, job) => <>{job.moTa.length > 50 ? job.moTa.substr(0, 100) + "..." : job.moTa}</>,
       width: "30%",
     },
     {
@@ -66,11 +62,8 @@ function JobManagement() {
       dataIndex: "action",
       render: (text, job) => (
         <Fragment>
-          <Link
-            key={1}
-            to={`/admin/listjob/edit/${job.id}`}
-          >
-            <EditOutlined className="btn btn-primary"  />
+          <Link key={1} to={`/admin/listjob/edit/${job.id}`}>
+            <EditOutlined className="btn btn-primary" />
           </Link>
           <span
             key={2}
@@ -94,10 +87,7 @@ function JobManagement() {
     <div className="JobManagement container">
       <h3 className="text-center">List Jobs</h3>
       <div className="d-flex justify-content-between align-items-center m-0 p-0 pb-3">
-        <NavLink
-          to="/admin/listjob/add"
-          className="btn btn-primary px-3 d-flex align-items-center"
-        >
+        <NavLink to="/admin/listjob/add" className="btn btn-primary px-3 d-flex align-items-center">
           <BookTwoTone />
           <span className="ml-2">Add new Job</span>
         </NavLink>

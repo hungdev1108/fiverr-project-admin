@@ -100,7 +100,6 @@ export const ConfirmUpdate = (history) => {
   });
 };
 
-
 // export const ConfirmDeleteUser = () => {
 //   Modal.warning({
 //     title: "Notification!",
@@ -116,6 +115,8 @@ export const confirmDelete = (name, id, dispacth) => {
     onOk() {
       dispacth(deleteJobaction(id));
     },
+  });
+};
 
 export const signInError = (noti) => {
   Modal.error({
@@ -130,6 +131,5 @@ export const confirmSigninadmin = () => {
     title: "Notification!",
     content: "UnAuthorization!!!",
     onOk() {},
-
   });
 };

@@ -50,7 +50,7 @@ function AdminTemplate(props) {
   const { Component, ...restProps } = props;
 
   const { userSignin } = useSelector((state) => state.UserManagementReducer);
-  console.log(userSignin);
+  //   console.log(userSignin);
 
   useEffect(() => {
     window.scrollTo(0, 0);

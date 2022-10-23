@@ -15,7 +15,7 @@ function UserManagement() {
   const dispatch = useDispatch();
   const { danhSachNguoiDung } = useSelector((state) => state.UserManagementReducer);
 
-  console.log({ danhSachNguoiDung });
+  //   console.log({ danhSachNguoiDung });
 
   const columns = [
     {
@@ -23,6 +23,7 @@ function UserManagement() {
       dataIndex: "id",
       sorter: (a, b) => a.id - b.id,
       sortDirections: ["descend"],
+      defaultSortOrder: "descend",
       width: "5%",
     },
     {
