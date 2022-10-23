@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
 import UserManagement from "./Pages/UserManagement/UserManagement";
 import JobManagement from "./Pages/JobManagement/JobManagement";
@@ -9,22 +9,23 @@ import EditUser from "./Pages/UserManagement/EditUser/EditUser";
 import AddUser from "./Pages/UserManagement/AddUser/AddUser";
 import AddJob from "./Pages/JobManagement/AddJob/AddJob";
 import EditJob from "./Pages/JobManagement/EditJob/EditJob";
-import Login from "./Pages/Login/Login";
+import Loading from "./components/Loading/Loading";
+import SignIn from "./Pages/SignIn/SignIn";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Loading /> */}
+        <Loading />
         <Switch>
           {/* Components */}
-          <AdminTemplate path="/admin" exact Component={UserManagement} />
+          <Route path="/admin/signin" exact component={SignIn} />
 
-          <AdminTemplate path="/login" exact Component={Login} />
+          <AdminTemplate path="/admin" exact Component={UserManagement} />
 
           <AdminTemplate path="/admin/listuser" exact Component={UserManagement} />
           <AdminTemplate path="/admin/listuser/add" exact Component={AddUser} />
-          <AdminTemplate path="/admin/listuser/edit/:id" exact Component={EditUser} />
+          <AdminTemplate path="/admin/user/edit/:id" exact Component={EditUser} />
 
           <AdminTemplate path="/admin/listjob" exact Component={JobManagement} />
           <AdminTemplate path="/admin/listjob/add" exact Component={AddJob} />
@@ -33,7 +34,9 @@ function App() {
           <AdminTemplate path="/admin/listjobtype" exact Component={JobTypeManagement} />
           <AdminTemplate path="/admin/listservice" exact Component={ServiceManagement} />
 
-          <AdminTemplate path="/" exact Component={UserManagement} />
+          <Route path="/" exact component={SignIn} />
+
+          {/* <AdminTemplate path="/" exact Component={UserManagement} /> */}
         </Switch>
       </Router>
     </div>

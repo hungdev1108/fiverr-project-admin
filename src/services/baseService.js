@@ -46,7 +46,7 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "DELETE",
       headers: {
-        tokenCybersoft: "Bearer " + localStorage.getItem(TOKEN_CYBER), // JWT
+        tokenCybersoft: TOKEN_CYBER, // JWT
       },
     });
   };

@@ -1,10 +1,13 @@
 import React, { Fragment, useEffect } from "react";
-import { Table, Input, Tag, Button } from "antd";
+import { Table, Input, Tag } from "antd";
 import { UserAddOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getDanhSachNguoiDungAction, getTimKiemNguoiDungTheoTenAction } from "../../store/actions/UserManagementAction";
-import { NavLink } from "react-router-dom";
-import { array } from "yup";
+import {
+  deleteNguoiDungAction,
+  getDanhSachNguoiDungAction,
+  getTimKiemNguoiDungTheoTenAction,
+} from "../../store/actions/UserManagementAction";
+import { Link, NavLink } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -12,7 +15,6 @@ function UserManagement() {
   const dispatch = useDispatch();
   const { danhSachNguoiDung } = useSelector((state) => state.UserManagementReducer);
 
-  //   console.log(typeof danhSachNguoiDung);
   console.log({ danhSachNguoiDung });
 
   const columns = [
@@ -74,14 +76,18 @@ function UserManagement() {
       width: "10%",
       dataIndex: "skill",
       render: (_, { skill }) => {
-        // console.log(typeof { skill });
-        // console.log({ skill });
-        if (skill === null || skill.length === 0) {
+        let data;
+        if (typeof skill === "string") {
+          data = JSON.parse(skill);
+        } else {
+          data = skill;
+        }
+        if (data === null || data.length === 0) {
           return <span>No skill</span>;
         }
         return (
           <Fragment>
-            {skill?.map((item, index) => {
+            {data.map((item, index) => {
               return (
                 <Tag className="mb-2" color="geekblue" key={index}>
                   {item.toUpperCase()}
@@ -98,15 +104,18 @@ function UserManagement() {
       width: "25%",
       dataIndex: "certification",
       render: (_, { certification }) => {
-        if (certification === null) {
-          return <span>No certificate</span>;
+        let data;
+        if (typeof certification === "string") {
+          data = JSON.parse(certification);
+        } else {
+          data = certification;
         }
-        if (certification.length === 0) {
+        if (data === null || data.length === 0) {
           return <span>No certificate</span>;
         }
         return (
           <Fragment>
-            {certification?.map((item, index) => {
+            {data.map((item, index) => {
               return (
                 <Tag className="mb-2" color="green" key={index}>
                   {item.toUpperCase()}
@@ -121,15 +130,24 @@ function UserManagement() {
       title: "Action",
       dataIndex: "action",
       width: "25%",
-      render: () => {
+      render: (text, user) => {
         return (
           <Fragment>
-            <NavLink to="/">
+            <Link to={`/admin/user/edit/${user.id}`}>
               <EditOutlined className="btn btn-primary" />
-            </NavLink>
-            <NavLink to="/">
+            </Link>
+            <span
+              to="/"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                if (window.confirm("Are you sure delete user " + user.name + "?")) {
+                  // Call
+                  dispatch(deleteNguoiDungAction(user.id));
+                }
+              }}
+            >
               <DeleteOutlined className="ml-3 btn btn-danger" />
-            </NavLink>
+            </span>
           </Fragment>
         );
       },
@@ -143,7 +161,7 @@ function UserManagement() {
   }, []);
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
+    // console.log("params", pagination, filters, sorter, extra);
   };
   const onSearch = (value) => {
     dispatch(getTimKiemNguoiDungTheoTenAction(value));
@@ -166,7 +184,7 @@ function UserManagement() {
           onSearch={onSearch}
         />
       </div>
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Table columns={columns} dataSource={data} onChange={onChange} rowKey={"id"} />
     </div>
   );
 }
