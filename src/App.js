@@ -47,7 +47,7 @@ function App() {
 
           <AdminTemplate path="/admin/listservice" exact Component={ServiceManagement} />
 
-          <AuthRoute path="/" exact component={SignIn} />
+          <AuthRoute path="/" exact component={SignIn} redirectPath="/admin/listuser" />
 
           {/* <AdminTemplate path="/" exact Component={UserManagement} /> */}
         </Switch>

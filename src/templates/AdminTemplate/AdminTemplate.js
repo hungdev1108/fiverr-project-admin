@@ -16,16 +16,14 @@ const menu = (
       {
         key: "2",
         label: (
-          <a
-            href="/"
+          <Link
+            to="/"
             onClick={() => {
-              const history = useHistory();
               localStorage.clear();
-              history.push(`/admin/signin`);
             }}
           >
             Logout
-          </a>
+          </Link>
         ),
       },
     ]}
