@@ -1,20 +1,14 @@
 import React, { Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteLoaiCongViecMenuAction,
-  getDanhSachLoaiCongViecMenuAction,
-  getThongTinLoaiCongViecTheoIdAction,
-} from "../../store/actions/JobTypeManagementAction";
-import { UserAddOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Link, NavLink } from "react-router-dom";
 import { Table } from "antd";
+import { UserAddOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteNguoiDungAction } from "../../store/actions/UserManagementAction";
+import { Link, NavLink } from "react-router-dom";
+import { getChiTietLoaiCongViecAction } from "../../store/actions/JobTypeManagementAction";
 
-function JobTypeManagement() {
+function JobTypeDetail() {
   const dispatch = useDispatch();
-  const { danhSachLoaiCongViec } = useSelector((state) => state.JobTypeManagementReducer);
-  //   console.log("danhSachLoaiCongViec", danhSachLoaiCongViec);
-
-  const data = danhSachLoaiCongViec;
+  const { danhSachChiTietLoaiCongViec } = useSelector((state) => state.JobTypeManagementReducer);
 
   const columns = [
     {
@@ -26,31 +20,39 @@ function JobTypeManagement() {
       width: "5%",
     },
     {
-      title: "Job Type Name",
-      dataIndex: "tenLoaiCongViec",
-      sorter: (a, b) => a.tenLoaiCongViec.length - b.tenLoaiCongViec.length,
+      title: "Job Type Code",
+      dataIndex: "maLoaiCongviec",
+      sorter: (a, b) => a.maLoaiCongviec - b.maLoaiCongviec,
       sortDirections: ["descend"],
-      width: "70%",
+      width: "15%",
+    },
+    {
+      title: "Group Name",
+      dataIndex: "tenNhom",
+      sorter: (a, b) => a.tenNhom.length - b.tenNhom.length,
+      sortDirections: ["descend"],
+      width: "55%",
     },
 
     {
       title: "Action",
       dataIndex: "action",
       width: "25%",
-      render: (text, jobtype) => {
+      render: (text, jobtypedetail) => {
         return (
           <Fragment>
-            <Link to={`/admin/listjobtype/edit/${jobtype.id}`}>
+            <span
+              onClick={() => {
+                alert("Lỗi API lấy chi tiết công việc theo id");
+              }}
+            >
               <EditOutlined className="btn btn-primary" />
-            </Link>
+            </span>
             <span
               to="/"
               style={{ cursor: "pointer" }}
               onClick={() => {
-                if (window.confirm("Are you sure delete job type " + jobtype.tenLoaiCongViec + "?")) {
-                  // Call
-                  dispatch(deleteLoaiCongViecMenuAction(jobtype.id));
-                }
+                alert("Không có API xóa nhóm chi tiết công việc");
               }}
             >
               <DeleteOutlined className="ml-3 btn btn-danger" />
@@ -61,8 +63,10 @@ function JobTypeManagement() {
     },
   ];
 
+  const data = danhSachChiTietLoaiCongViec;
+
   useEffect(() => {
-    dispatch(getDanhSachLoaiCongViecMenuAction());
+    dispatch(getChiTietLoaiCongViecAction());
   }, []);
 
   const onChange = (pagination, filters, sorter, extra) => {
@@ -71,11 +75,11 @@ function JobTypeManagement() {
 
   return (
     <div className="container">
-      <h3 className="text-center">Job Type List</h3>
+      <h3 className="text-center">Detailed List Of Job Types</h3>
       <div className="d-flex justify-content-between align-items-center m-0 p-0 pb-3">
-        <NavLink to="/admin/listjobtype/add" className="btn btn-primary px-3 d-flex align-items-center">
+        <NavLink to="/admin/listjobtypedetail/add" className="btn btn-primary px-3 d-flex align-items-center">
           <UserAddOutlined />
-          <span className="ml-2">Add Job Type</span>
+          <span className="ml-2">Add Job Type Detail</span>
         </NavLink>
       </div>
       <Table columns={columns} dataSource={data} onChange={onChange} rowKey={"id"} />
@@ -83,4 +87,4 @@ function JobTypeManagement() {
   );
 }
 
-export default JobTypeManagement;
+export default JobTypeDetail;
