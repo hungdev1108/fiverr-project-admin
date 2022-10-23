@@ -76,14 +76,18 @@ function UserManagement() {
       width: "10%",
       dataIndex: "skill",
       render: (_, { skill }) => {
-        // console.log(typeof { skill });
-        // console.log({ skill });
-        if (skill === null || skill.length === 0) {
+        let data;
+        if (typeof skill === "string") {
+          data = JSON.parse(skill);
+        } else {
+          data = skill;
+        }
+        if (data === null || data.length === 0) {
           return <span>No skill</span>;
         }
         return (
           <Fragment>
-            {skill?.map((item, index) => {
+            {data.map((item, index) => {
               return (
                 <Tag className="mb-2" color="geekblue" key={index}>
                   {item.toUpperCase()}
@@ -100,15 +104,18 @@ function UserManagement() {
       width: "25%",
       dataIndex: "certification",
       render: (_, { certification }) => {
-        if (certification === null) {
-          return <span>No certificate</span>;
+        let data;
+        if (typeof certification === "string") {
+          data = JSON.parse(certification);
+        } else {
+          data = certification;
         }
-        if (certification.length === 0) {
+        if (data === null || data.length === 0) {
           return <span>No certificate</span>;
         }
         return (
           <Fragment>
-            {certification?.map((item, index) => {
+            {data.map((item, index) => {
               return (
                 <Tag className="mb-2" color="green" key={index}>
                   {item.toUpperCase()}

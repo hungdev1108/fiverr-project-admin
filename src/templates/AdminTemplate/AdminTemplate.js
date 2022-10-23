@@ -1,21 +1,29 @@
-import React, { Fragment, useEffect } from "react";
-import { Redirect, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Redirect, Route, useHistory } from "react-router-dom";
 import "./AdminTemplate.scss";
 
-import { Layout, Menu, Dropdown } from "antd";
+import { Dropdown, Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
-import { USER_LOGIN } from "../../utils/settings/config";
+import { TOKEN, USER_LOGIN } from "../../utils/settings/config";
+import { useSelector } from "react-redux";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const menu = (
   <Menu
     items={[
-      { key: "1", label: <Link to="/profile">Profile</Link> },
+      //   { key: "1", label: <Link to="/profile">Profile</Link> },
       {
         key: "2",
         label: (
-          <a href="/" onClick={() => localStorage.clear()}>
+          <a
+            href="/"
+            onClick={() => {
+              const history = useHistory();
+              localStorage.clear();
+              history.push(`/admin/signin`);
+            }}
+          >
             Logout
           </a>
         ),
@@ -41,15 +49,18 @@ function AdminTemplate(props) {
   // path, exact, Component
   const { Component, ...restProps } = props;
 
+  const { userSignin } = useSelector((state) => state.UserManagementReducer);
+  console.log(userSignin);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Check role account
-  //   if (!localStorage.getItem(USER_LOGIN)) {
-  //     alert("Bạn không có quyền truy cập vào trang này !");
-  //     return <Redirect to="/login" />;
-  //   }
+  //   Check role account
+  if (!localStorage.getItem(TOKEN)) {
+    alert("Please signin!");
+    return <Redirect to="/admin/signin" />;
+  }
 
   return (
     <Route
@@ -85,7 +96,7 @@ function AdminTemplate(props) {
               <Header className="site-layout-sub-header-background mb-3" style={{ padding: 0 }}>
                 <div className="text-success text-right mr-3 float-right">
                   <Dropdown overlay={menu} placement="bottom" arrow trigger={["click"]}>
-                    <div className="font-weight-bold" role="button">{`Hi! Admin`}</div>
+                    <div className="font-weight-bold" role="button">{`Hi! Admin (${userSignin.user?.name})`}</div>
                   </Dropdown>
                 </div>
               </Header>
