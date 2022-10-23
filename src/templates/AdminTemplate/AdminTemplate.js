@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Redirect, Route, useHistory } from "react-router-dom";
+import { NavLink, Redirect, Route, useHistory } from "react-router-dom";
 import "./AdminTemplate.scss";
 
 import { Dropdown, Layout, Menu } from "antd";
@@ -86,7 +86,7 @@ function AdminTemplate(props) {
               }}
             >
               <div className="d-flex align-items-center justify-content-center">
-                <Link to="/" className="logo">
+                <Link to="/admin/listuser" className="logo">
                   <img width={150} src={require("../../assets/images/Fiverr-Logo.png")} alt="Logo" />
                 </Link>
               </div>

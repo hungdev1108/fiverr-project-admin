@@ -32,7 +32,7 @@ export const CreateAccountSuccess = (history) => {
     title: "Notification!",
     content: "Create account admin successful!",
     onOk() {
-      history.push("/");
+      history.push("/admin/listuser");
     },
   });
 };
@@ -84,13 +84,15 @@ export const confirmSigninadmin = () => {
   });
 };
 
-
 export const ConfirmUpdateJobType = (history) => {
   Modal.success({
     title: "Notification!",
     content: "Update job type successfully!",
     onOk() {
       history.push("/admin/listjobtype");
+    },
+  });
+};
 
 export const CreateJobSuccess = (history) => {
   Modal.success({
@@ -101,7 +103,6 @@ export const CreateJobSuccess = (history) => {
     },
   });
 };
-
 
 export const ConfirmDeleteJobTypeDONE = () => {
   Modal.success({
@@ -142,4 +143,3 @@ export const EditJobSuccess = (history) => {
     },
   });
 };
-

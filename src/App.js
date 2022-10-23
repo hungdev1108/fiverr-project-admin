@@ -16,6 +16,7 @@ import EditJobType from "./Pages/JobTypeManagement/EditJobType/EditJobType";
 import JobTypeDetail from "./Pages/JobTypeDetail/JobTypeDetail";
 import AddJobTypeDetail from "./Pages/JobTypeDetail/AddJobTypeDetail/AddJobTypeDetail";
 import EditJobTypeDetail from "./Pages/JobTypeDetail/EditJobTypeDetail/EditJobTypeDetail";
+import { AuthRoute } from "./Guard/Guard";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Loading />
         <Switch>
           {/* Components */}
-          <Route path="/admin/signin" exact component={SignIn} />
+          <AuthRoute path="/admin/signin" exact component={SignIn} />
 
           <AdminTemplate path="/admin" exact Component={UserManagement} />
 
@@ -46,7 +47,7 @@ function App() {
 
           <AdminTemplate path="/admin/listservice" exact Component={ServiceManagement} />
 
-          <Route path="/" exact component={SignIn} />
+          <AuthRoute path="/" exact component={SignIn} />
 
           {/* <AdminTemplate path="/" exact Component={UserManagement} /> */}
         </Switch>
