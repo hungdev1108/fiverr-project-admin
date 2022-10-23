@@ -27,49 +27,6 @@ export const SignUpError = (noti) => {
   });
 };
 
-// export const ConfirmSignOut = (history) => {
-//   confirm({
-//     title: "Notification!",
-//     content: "Want to sign out of your account??",
-//     onOk() {
-//       localStorage.removeItem(USER_LOGIN);
-//       localStorage.removeItem(TOKEN);
-//       history.push("/");
-//       window.location.reload();
-//     },
-//     onCancel() {},
-//   });
-// };
-
-// export const ConfirmDeleteHiredJob = (id, dispatch) => {
-//   confirm({
-//     title: "THÔNG BÁO!",
-//     content: "BẠN CÓ MUỐN XOÁ CÔNG VIỆC ĐÃ THUÊ?",
-//     onOk() {
-//       dispatch(deleteHireJobAction(id));
-//     },
-//     onCancel() {},
-//   });
-// };
-
-// export const deleteHiredJobSuccess = () => {
-//   Modal.success({
-//     title: "XOÁ CÔNG VIỆC THÀNH CÔNG!",
-//     content: "XOÁ CÔNG VIỆC THÀNH CÔNG!",
-//     onOk() {},
-//   });
-// };
-
-// export const BookingJobSuccess = () => {
-//   Modal.success({
-//     title: "Notification!",
-//     content: "Job hire successful, please check in profile page!",
-//     onOk() {
-//       window.location.reload();
-//     },
-//   });
-// };
-
 export const CreateAccountSuccess = (history) => {
   Modal.success({
     title: "Notification!",
@@ -95,18 +52,11 @@ export const ConfirmUpdate = (history) => {
     title: "Notification!",
     content: "Update info user successfully!",
     onOk() {
-      history.push("/");
+      history.push("/admin/listuser");
     },
   });
 };
 
-// export const ConfirmDeleteUser = () => {
-//   Modal.warning({
-//     title: "Notification!",
-//     content: "Are you sure delete user?",
-//     onOk: {},
-//   });
-// };
 export const confirmDelete = (name, id, dispacth) => {
   confirm({
     title: "Notification!",
@@ -134,12 +84,51 @@ export const confirmSigninadmin = () => {
   });
 };
 
+
+export const ConfirmUpdateJobType = (history) => {
+  Modal.success({
+    title: "Notification!",
+    content: "Update job type successfully!",
+    onOk() {
+      history.push("/admin/listjobtype");
+
 export const CreateJobSuccess = (history) => {
   Modal.success({
     title: "Notification!",
     content: "Create new job successful!",
     onOk() {
       history.push("/admin/listjob");
+    },
+  });
+};
+
+
+export const ConfirmDeleteJobTypeDONE = () => {
+  Modal.success({
+    title: "Notification!",
+    content: "Job type successfully!",
+    onOk() {
+      window.location.reload();
+    },
+  });
+};
+
+export const CreateJobTypeSuccess = (history) => {
+  Modal.success({
+    title: "Notification!",
+    content: "Create Job type successful!",
+    onOk() {
+      history.push("/admin/listjobtype");
+    },
+  });
+};
+
+export const CreateJobTypeDetailSuccess = (history) => {
+  Modal.success({
+    title: "Notification!",
+    content: "Create Job type detail successful!",
+    onOk() {
+      history.push("/admin/listjobtypedetail");
     },
   });
 };
@@ -153,3 +142,4 @@ export const EditJobSuccess = (history) => {
     },
   });
 };
+

@@ -11,6 +11,11 @@ import AddJob from "./Pages/JobManagement/AddJob/AddJob";
 import EditJob from "./Pages/JobManagement/EditJob/EditJob";
 import Loading from "./components/Loading/Loading";
 import SignIn from "./Pages/SignIn/SignIn";
+import AddJobType from "./Pages/JobTypeManagement/AddJobType/AddJobType";
+import EditJobType from "./Pages/JobTypeManagement/EditJobType/EditJobType";
+import JobTypeDetail from "./Pages/JobTypeDetail/JobTypeDetail";
+import AddJobTypeDetail from "./Pages/JobTypeDetail/AddJobTypeDetail/AddJobTypeDetail";
+import EditJobTypeDetail from "./Pages/JobTypeDetail/EditJobTypeDetail/EditJobTypeDetail";
 
 function App() {
   return (
@@ -32,6 +37,13 @@ function App() {
           <AdminTemplate path="/admin/listjob/edit/:id" exact Component={EditJob} />
 
           <AdminTemplate path="/admin/listjobtype" exact Component={JobTypeManagement} />
+          <AdminTemplate path="/admin/listjobtype/add" exact Component={AddJobType} />
+          <AdminTemplate path="/admin/listjobtype/edit/:id" exact Component={EditJobType} />
+
+          <AdminTemplate path="/admin/listjobtypedetail" exact Component={JobTypeDetail} />
+          <AdminTemplate path="/admin/listjobtypedetail/add" exact Component={AddJobTypeDetail} />
+          <AdminTemplate path="/admin/listjobtypedetail/edit/:id" exact Component={EditJobTypeDetail} />
+
           <AdminTemplate path="/admin/listservice" exact Component={ServiceManagement} />
 
           <Route path="/" exact component={SignIn} />

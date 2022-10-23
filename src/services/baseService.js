@@ -48,6 +48,7 @@ export class baseService {
       headers: {
         token: localStorage.getItem(TOKEN),
         tokenCybersoft: TOKEN_CYBER, // JWT
+        token: localStorage.getItem(TOKEN), // JWT
       },
     });
   };

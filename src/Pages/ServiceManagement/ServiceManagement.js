@@ -1,7 +1,7 @@
 import React from "react";
 
 function ServiceManagement() {
-  return <div>ServiceManagement</div>;
+  return <div>Updating...</div>;
 }
 
 export default ServiceManagement;
