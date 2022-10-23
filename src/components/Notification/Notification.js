@@ -133,3 +133,23 @@ export const confirmSigninadmin = () => {
     onOk() {},
   });
 };
+
+export const CreateJobSuccess = (history) => {
+  Modal.success({
+    title: "Notification!",
+    content: "Create new job successful!",
+    onOk() {
+      history.push("/admin/listjob");
+    },
+  });
+};
+
+export const EditJobSuccess = (history) => {
+  Modal.success({
+    title: "Notification!",
+    content: "Edit job successful!",
+    onOk() {
+      history.push("/admin/listjob");
+    },
+  });
+};

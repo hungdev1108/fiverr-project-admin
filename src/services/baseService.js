@@ -11,7 +11,7 @@ export class baseService {
       data: model,
       headers: {
         tokenCybersoft: TOKEN_CYBER,
-        token: "Bearer " + localStorage.getItem(TOKEN), // JWT
+        token: localStorage.getItem(TOKEN), // JWT
       },
     });
   };
@@ -46,6 +46,7 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "DELETE",
       headers: {
+        token: localStorage.getItem(TOKEN),
         tokenCybersoft: TOKEN_CYBER, // JWT
       },
     });

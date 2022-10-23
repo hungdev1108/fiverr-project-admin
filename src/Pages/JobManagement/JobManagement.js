@@ -25,7 +25,7 @@ function JobManagement() {
       title: <span className="font-semibold">Image</span>,
       dataIndex: "hinhAnh",
       render: (text, job, index) => (
-        <>
+        <div style={{ height: 100 }}>
           <img
             style={{ width: "100%", height: "100%" }}
             src={text}
@@ -35,7 +35,7 @@ function JobManagement() {
               e.target.src = `https://picsum.photos/id/${index}/70/70`;
             }}
           />
-        </>
+        </div>
       ),
       width: "15%",
       align: "center",
@@ -54,7 +54,9 @@ function JobManagement() {
     {
       title: <span className="font-semibold">Description</span>,
       dataIndex: "moTa",
-      render: (text, job) => <>{job.moTa.length > 50 ? job.moTa.substr(0, 100) + "..." : job.moTa}</>,
+      render: (text, job) => (
+        <>{job.moTa.length > 50 ? job.moTa.substr(0, 100) + "..." : job.moTa}</>
+      ),
       width: "30%",
     },
     {
@@ -87,7 +89,10 @@ function JobManagement() {
     <div className="JobManagement container">
       <h3 className="text-center">List Jobs</h3>
       <div className="d-flex justify-content-between align-items-center m-0 p-0 pb-3">
-        <NavLink to="/admin/listjob/add" className="btn btn-primary px-3 d-flex align-items-center">
+        <NavLink
+          to="/admin/listjob/add"
+          className="btn btn-primary px-3 d-flex align-items-center"
+        >
           <BookTwoTone />
           <span className="ml-2">Add new Job</span>
         </NavLink>

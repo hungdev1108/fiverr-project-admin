@@ -36,8 +36,8 @@ export class JobManagementServices extends baseService {
   };
 
   // API upload hình ảnh công việc
-  postHinhAnhCongViec = (maCongViec) => {
-    return this.post(`api/cong-viec/upload-hinh-cong-viec/${maCongViec}`);
+  postHinhAnhCongViec = (maCongViec,formData) => {
+    return this.post(`api/cong-viec/upload-hinh-cong-viec/${maCongViec}`,formData);
   };
 }
 
