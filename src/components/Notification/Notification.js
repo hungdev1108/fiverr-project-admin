@@ -1,5 +1,6 @@
 import { Modal } from "antd";
-import { useDispatch } from "react-redux";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { deleteJobaction } from "../../store/actions/JobManagementAction";
 
 const { confirm } = Modal;
 
@@ -99,6 +100,23 @@ export const ConfirmUpdate = (history) => {
   });
 };
 
+
+// export const ConfirmDeleteUser = () => {
+//   Modal.warning({
+//     title: "Notification!",
+//     content: "Are you sure delete user?",
+//     onOk: {},
+//   });
+// };
+export const confirmDelete = (name, id, dispacth) => {
+  confirm({
+    title: "Notification!",
+    content: `Are you sure to delete ${name}`,
+    icon: <ExclamationCircleOutlined />,
+    onOk() {
+      dispacth(deleteJobaction(id));
+    },
+
 export const signInError = (noti) => {
   Modal.error({
     title: "Login failed!",
@@ -112,5 +130,6 @@ export const confirmSigninadmin = () => {
     title: "Notification!",
     content: "UnAuthorization!!!",
     onOk() {},
+
   });
 };
