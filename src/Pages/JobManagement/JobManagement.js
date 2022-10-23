@@ -68,7 +68,7 @@ function JobManagement() {
         <Fragment>
           <Link
             key={1}
-            to={`/films/edit/${job.id}`}
+            to={`/admin/listjob/edit/${job.id}`}
           >
             <EditOutlined className="btn btn-primary"  />
           </Link>
