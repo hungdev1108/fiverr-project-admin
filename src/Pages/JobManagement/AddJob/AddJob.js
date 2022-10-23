@@ -1,20 +1,32 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { DatePicker, Form, Input, InputNumber, Select } from "antd";
+import { Form, Input, InputNumber, message, Select } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-
-const { Option } = Select;
+import { uploadJobAction } from "../../../store/actions/JobManagementAction";
+import { getMenuLoaiCongViecAction } from "../../../store/actions/JobTypeManagementAction";
 
 function AddJob() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const userSignIn = useSelector(
+    (state) => state.UserManagementReducer.userSignin.user
+  );
+  const menuloaicongviec = useSelector(
+    (state) => state.JobTypeManagementReducer.menuloaicongviec
+  );
+  const [JobTypeDetail, setJobTypeDetail] = useState();
   const [imgSrc, setImgSrc] = useState("");
+  const [fileImage, setFileImage] = useState();
+
+  const [form] = Form.useForm();
+  // let formData = new FormData();
 
   const onFinish = (values) => {
-    values = { ...values };
-    console.log(values);
-    // dispatch(postNguoiDungAction(values, history));
+    values = { ...values, nguoiTao: userSignIn.id };
+    const formData = new FormData();
+    formData.append("formFile", fileImage, fileImage.name);
+    dispatch(uploadJobAction(values, history, formData));
   };
 
   const handleChangeFile = (e) => {
@@ -33,14 +45,32 @@ function AddJob() {
         setImgSrc(e.target.result); //base64 img
       };
 
-      // formik.setErrors()
+      setFileImage(file);
+      // data.append("file", file, file.name);
     }
   };
+
+  const onChangeJobType = (id) => {
+    const jobType = menuloaicongviec.find((item) => item.id === id);
+    const jobTypeDetailClone = [];
+    jobType?.dsNhomChiTietLoai.map((item1) => {
+      return item1?.dsChiTietLoai.map((item2) =>
+        jobTypeDetailClone.push(item2)
+      );
+    });
+
+    setJobTypeDetail(jobTypeDetailClone);
+  };
+
+  useEffect(() => {
+    dispatch(getMenuLoaiCongViecAction());
+  }, []);
 
   return (
     <div className="AddJob container">
       <h3 className="text-center mb-3">Create new Job</h3>
       <Form
+        form={form}
         onFinish={onFinish}
         labelCol={{
           span: 7,
@@ -64,6 +94,25 @@ function AddJob() {
           ]}
         >
           <Input placeholder="Enter job" />
+        </Form.Item>
+
+        <Form.Item label="JobType">
+          <Select
+            options={menuloaicongviec?.map((menu) => ({
+              label: menu.tenLoaiCongViec,
+              value: menu.id,
+            }))}
+            onChange={onChangeJobType}
+          />
+        </Form.Item>
+
+        <Form.Item name="maChiTietLoaiCongViec" label="JobTypeDetail">
+          <Select
+            options={JobTypeDetail?.map((item) => ({
+              label: item.tenChiTiet,
+              value: item.id,
+            }))}
+          />
         </Form.Item>
 
         <Form.Item
@@ -143,7 +192,8 @@ function AddJob() {
           rules={[
             {
               required: true,
-              message: "Please input job image",
+              message: "Please set image",
+              type: "file",
             },
           ]}
         >

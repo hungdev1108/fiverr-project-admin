@@ -5,6 +5,7 @@ export class JobTypeManagementServices extends baseService {
     super();
   }
 
+
   // API lấy danh sách loại công việc menu
   getDanhSachLoaiCongViecMenu = () => {
     return this.get(`api/loai-cong-viec`);
@@ -38,6 +39,11 @@ export class JobTypeManagementServices extends baseService {
   /// API thêm nhóm loại chi tiết công việc
   postChiTietLoaiCongViec = (infojobtypedetail) => {
     return this.post(`api/chi-tiet-loai-cong-viec/them-nhom-chi-tiet-loai`, infojobtypedetail);
+
+  // API lấy menu loại công việc
+  getMenuLoaiCongViec = () => {
+    return this.get(`api/cong-viec/lay-menu-loai-cong-viec`);
+
   };
 }
 

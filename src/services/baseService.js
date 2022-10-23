@@ -46,6 +46,7 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "DELETE",
       headers: {
+        token: localStorage.getItem(TOKEN),
         tokenCybersoft: TOKEN_CYBER, // JWT
         token: localStorage.getItem(TOKEN), // JWT
       },

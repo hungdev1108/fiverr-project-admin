@@ -9,6 +9,7 @@ import {
   SET_DANH_SACH_CHI_TIET_LOAI_CONG_VIEC,
   SET_DANH_SACH_LOAI_CONG_VIEC,
   SET_LOAI_CONG_VIEC_ID,
+  SET_MENU_LOAI_CONG_VIEC,
 } from "../types/JobTypeManagementType";
 import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 
@@ -22,7 +23,6 @@ export const getDanhSachLoaiCongViecMenuAction = () => {
         danhSachLoaiCongViec: result.data.content,
       });
       dispatch(hideLoadingAction);
-      //   console.log(result.data.content);
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);
@@ -40,7 +40,6 @@ export const getThongTinLoaiCongViecTheoIdAction = (id) => {
         thongTinLoaiCongViec: result.data.content,
       });
       dispatch(hideLoadingAction);
-      //   console.log("ACTION", result.data.content);
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);
@@ -55,7 +54,6 @@ export const putThongTinLoaiCongViecMenu = (id, infoTypeJob, history) => {
       const result = await jobTypeManagementServices.putThongTinLoaiCongViecMenu(id, infoTypeJob);
       ConfirmUpdateJobType(history);
       dispatch(hideLoadingAction);
-      console.log("result", result);
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);
@@ -69,7 +67,6 @@ export const deleteLoaiCongViecMenuAction = (id) => {
       dispatch(displayLoadingAction);
       const result = await jobTypeManagementServices.deleteLoaiCongViecMenu(id);
       ConfirmDeleteJobTypeDONE();
-      console.log("result", result);
       getDanhSachLoaiCongViecMenuAction();
       dispatch(hideLoadingAction);
     } catch (errors) {
@@ -86,7 +83,6 @@ export const postLoaiCongViecMenuAction = (values, history) => {
       const result = await jobTypeManagementServices.postLoaiCongViecMenu(values);
       CreateJobTypeSuccess(history);
       dispatch(hideLoadingAction);
-      //   console.log("result", result);
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);
@@ -104,8 +100,6 @@ export const getChiTietLoaiCongViecAction = () => {
         danhSachChiTietLoaiCongViec: result.data.content,
       });
       dispatch(hideLoadingAction);
-
-      //   console.log(result.data.content);
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);
@@ -120,10 +114,26 @@ export const postChiTietLoaiCongViecAction = (values, history) => {
       const result = await jobTypeManagementServices.postChiTietLoaiCongViec(values);
       CreateJobTypeDetailSuccess(history);
       dispatch(hideLoadingAction);
-      //   console.log("result", result);
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);
+    }
+  };
+};
+
+export const getMenuLoaiCongViecAction = () => {
+  return async (dispacth) => {
+    try {
+      dispacth(displayLoadingAction);
+      const result = await jobTypeManagementServices.getMenuLoaiCongViec();
+      dispacth({
+        type: SET_MENU_LOAI_CONG_VIEC,
+        payload: result.data.content,
+      });
+      dispacth(hideLoadingAction);  
+    } catch (err) {
+      dispacth(hideLoadingAction);
+      console.log(err);
     }
   };
 };

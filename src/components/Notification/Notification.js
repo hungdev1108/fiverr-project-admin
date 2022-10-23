@@ -84,15 +84,24 @@ export const confirmSigninadmin = () => {
   });
 };
 
+
 export const ConfirmUpdateJobType = (history) => {
   Modal.success({
     title: "Notification!",
     content: "Update job type successfully!",
     onOk() {
       history.push("/admin/listjobtype");
+
+export const CreateJobSuccess = (history) => {
+  Modal.success({
+    title: "Notification!",
+    content: "Create new job successful!",
+    onOk() {
+      history.push("/admin/listjob");
     },
   });
 };
+
 
 export const ConfirmDeleteJobTypeDONE = () => {
   Modal.success({
@@ -123,3 +132,14 @@ export const CreateJobTypeDetailSuccess = (history) => {
     },
   });
 };
+
+export const EditJobSuccess = (history) => {
+  Modal.success({
+    title: "Notification!",
+    content: "Edit job successful!",
+    onOk() {
+      history.push("/admin/listjob");
+    },
+  });
+};
+
