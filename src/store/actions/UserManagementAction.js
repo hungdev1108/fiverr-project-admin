@@ -1,6 +1,8 @@
+import { Redirect } from "react-router-dom";
 import {
   ConfirmDeleteUser,
   ConfirmDeleteUserDONE,
+  confirmSigninadmin,
   ConfirmUpdate,
   CreateAccountSuccess,
 } from "../../components/Notification/Notification";
@@ -9,6 +11,7 @@ import {
   SET_DANH_SACH_NGUOI_DUNG,
   SET_DANH_SACH_NGUOI_DUNG_SEARCH,
   SET_THONG_TIN_NGUOI_DUNG,
+  SIGNIN_ACTION,
 } from "../types/UserManagementType";
 import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 
@@ -108,6 +111,35 @@ export const deleteNguoiDungAction = (id) => {
     } catch (errors) {
       dispatch(hideLoadingAction);
       console.log(errors);
+    }
+  };
+};
+
+export const SignInAction = (infoSignin, signInError, history) => {
+  return async (dispatch) => {
+    try {
+      dispatch(displayLoadingAction);
+
+      const result = await userManagementServices.signinSystem(infoSignin);
+      if (result.data.content.user?.role === "USER") {
+        confirmSigninadmin();
+        dispatch(hideLoadingAction);
+        return <Redirect to="/admin/signin" />;
+      }
+
+      if (result.data.statusCode === 200) {
+        dispatch({
+          type: SIGNIN_ACTION,
+          infoSignin: result.data.content,
+        });
+        history.push(`/admin/listuser`);
+      }
+
+      //   console.log("Login Action:", result);
+    } catch (error) {
+      dispatch(hideLoadingAction);
+      signInError(error.response?.data.content);
+      console.log("error", error);
     }
   };
 };

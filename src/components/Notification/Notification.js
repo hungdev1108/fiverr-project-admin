@@ -26,14 +26,6 @@ export const SignUpError = (noti) => {
   });
 };
 
-export const signInError = (noti) => {
-  Modal.error({
-    title: "Login failed!",
-    content: noti,
-    onOk() {},
-  });
-};
-
 // export const ConfirmSignOut = (history) => {
 //   confirm({
 //     title: "Notification!",
@@ -107,10 +99,18 @@ export const ConfirmUpdate = (history) => {
   });
 };
 
-// export const ConfirmDeleteUser = () => {
-//   Modal.warning({
-//     title: "Notification!",
-//     content: "Are you sure delete user?",
-//     onOk: {},
-//   });
-// };
+export const signInError = (noti) => {
+  Modal.error({
+    title: "Login failed!",
+    content: noti,
+    onOk() {},
+  });
+};
+
+export const confirmSigninadmin = () => {
+  Modal.error({
+    title: "Notification!",
+    content: "UnAuthorization!!!",
+    onOk() {},
+  });
+};

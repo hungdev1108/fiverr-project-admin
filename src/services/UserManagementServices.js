@@ -59,6 +59,15 @@ export class UserManagementServices extends baseService {
   postAvatar = (avatar) => {
     return this.post(`api/users/upload-avatar`, avatar);
   };
+
+  // API signin
+  signinSystem = (infoSignin) => {
+    // {
+    //     "email": "string",
+    //     "password": "string"
+    //   }
+    return this.post(`api/auth/signin`, infoSignin);
+  };
 }
 
 export const userManagementServices = new UserManagementServices();
